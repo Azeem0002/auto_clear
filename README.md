@@ -35,6 +35,7 @@ source .venv/bin/activate  # Linux/Mac
 .\.venv\Scripts\activate   # Windows
 
 # Install dependencies
+uv pip install .
 uv pip install -e .  # For development
 ```
 
