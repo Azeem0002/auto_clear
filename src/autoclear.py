@@ -20,7 +20,9 @@ def clear_terminal(max_attempt=3, delay=1):
             subprocess.run(
                 ["cmd", "/c", "cls"] if os.name == "nt" else ["clear"], check=True # Raise exception if command fails
             )
-            print("terminal cleared. ('stop-autoclear' to stop)")
+            print("Terminal cleared. \n'autoclear stop' to stop. \n'autoclear status' to check status.")
+           
+          
             # time.sleep(delay)
             return
         except subprocess.CalledProcessError:
@@ -39,6 +41,7 @@ def autoclear(interval=600):
 
 
 if __name__ == "__main__":
+          
     interval = int(sys.argv[1]) if len(sys.argv) > 1 else 600
-    time.sleep(3)
+    time.sleep(2)
     autoclear(interval)

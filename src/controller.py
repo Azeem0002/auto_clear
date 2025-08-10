@@ -10,6 +10,7 @@ from typing import Union
 app = typer.Typer()
 
 PID_FILE = Path("autoclear.pid")
+INTERVAL = (10 * 600) // 60
 
 
 def time_format(
@@ -40,6 +41,7 @@ def time_format(
     return " ".join(parts) if parts else f"0{minute_unit}"
 
 
+
 @app.command()
 def stop():
     PID_FILE = Path("autoclear.pid")
@@ -50,10 +52,10 @@ def stop():
     except ValueError:
         pid = None
 
-    status = status_autoclear(show_output=False)
+    current_status = status(show_output=False)
 
     # Enhanced status check
-    if not status["is_running"] and pid is None:
+    if not current_status["is_running"] and pid is None:
         typer.echo("autoclear is not running", err=True)
         raise typer.Exit(1)
 
@@ -61,8 +63,8 @@ def stop():
     pids_to_stop = set()
     if pid:
         pids_to_stop.add(pid)
-    if status["pids"]:
-        pids_to_stop.update(status["pids"])
+    if current_status["pids"]:
+        pids_to_stop.update(current_status["pids"])
 
     stopped = False
     for pid in pids_to_stop:
@@ -87,8 +89,9 @@ def stop():
         raise typer.Exit(1)
 
 
+
 @app.command()
-def status_autoclear(show_output: bool = True):
+def status(show_output: bool = True):
     PID_FILE = Path("autoclear.pid")
     controller_pid = os.getpid()
 
@@ -122,14 +125,15 @@ def status_autoclear(show_output: bool = True):
     return result
 
 
+
 @app.command()
-def start_autoclear(
-    minutes: int = typer.Option(10, "--time", "-t", help="start using custom time"),
+def start(
+    minutes: str = typer.Option("10", "--time", "-t", help="start using custom time"),
 ):
     MAX_ATTEMPTS = 2
-    INTERVAL = 10 * 60
+    
 
-    stat = status_autoclear(show_output=False)
+    stat = status(show_output=False)
     if stat["is_running"]:
         typer.echo(
             f"autoclear already running with PID:{stat['main_pid'] or None}", err=True
@@ -145,14 +149,15 @@ def start_autoclear(
             raise typer.Exit(1)
 
         try:
-            min_int = int(minutes)  # ✅ Keep this (clearer), dont use walrus
+            min_int = int(minutes)
+
             if min_int > 0:
                 interval = min_int * 60
                 typer.echo(
                     f"autoclear starting with '{time_format(interval)}' interval"
                 )
-                time.sleep(10)
-                break
+                # time.sleep(3)
+                break 
             else:
                 if attempt < MAX_ATTEMPTS:
                     minutes = (
@@ -178,13 +183,23 @@ def start_autoclear(
             f"maximum attempts reached. defaulting to '{time_format(INTERVAL)}' interval"
         )
         interval = INTERVAL
-        time.sleep(1)
+        # time.sleep(3)
 
     autoclear_process = subprocess.Popen(
         [sys.executable, str(Path(__file__).parent / "autoclear.py"), str(interval)]
     )
     PID_FILE.write_text(str(autoclear_process.pid))
     typer.echo(f"PID: {autoclear_process.pid}")
+    # time.sleep(2)
+
+
+
+@app.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    """Auto-clear terminal controller"""
+    if ctx.invoked_subcommand is None:
+        start(str(INTERVAL))
+
 
 
 if __name__ == "__main__":

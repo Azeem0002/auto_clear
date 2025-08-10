@@ -8,3 +8,7 @@ dependencies = [
     "psutil>=7.0.0",
     "typer>=0.16.0",
 ]
+
+
+[project.scripts]
+autoclear = "controller:app"
