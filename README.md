@@ -66,7 +66,7 @@ auto_clear/
 └── README.md
 ```
 
-### Setup
+### Dev
 
 ```bash
 # Install development dependencies
