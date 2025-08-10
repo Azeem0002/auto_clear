@@ -32,7 +32,7 @@ python -m venv .venv
 
 # Activate environment
 source .venv/bin/activate  # Linux/Mac
-.\.venv\Scripts\activate   # Windows
+.venv\Scripts\activate.bat   # Windows
 
 # Install dependencies
 uv pip install .
@@ -87,8 +87,9 @@ ruff check .
 
 ```bash
 # Ensure virtualenv is activated
-source .venv/bin/activate
+source .venv/bin/activate  # Linux/Mac
+.venv\Scripts\activate.bat   # Windows
 
 # Reinstall package
-uv pip install --force-reinstall -e .
+pip install --force-reinstall .
 ```
