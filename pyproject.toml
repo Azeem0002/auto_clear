@@ -1,0 +1,10 @@
+[project]
+name = "auto-clear"
+version = "0.1.0"
+description = "auto clear shell terminals at intervals"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "psutil>=7.0.0",
+    "typer>=0.16.0",
+]
