@@ -3,16 +3,16 @@ import time
 import os
 import sys
 
-def clear_terminal(max_attempt=3, delay=1):
+def clear_terminal(max_attempts=3, delay=1):
     """
     Clears terminal with transient error retries.
     Args:
-        max_retries: Maximum attempts before failing (default: 3)
+        max_attempts: Maximum attempts before failing (default: 3)
         retry_delay: Seconds between retries (default: 1)
     Raises:
         subprocess.CalledProcessError: If all retries fail
     """
-    for _ in range(max_attempt):
+    for _ in range(max_attempts):
         try:
             # Run OS-specific clear command:
             # - cmd /c cls (Windows)
