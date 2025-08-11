@@ -35,7 +35,7 @@ def autoclear(interval=600):
     Args:
         interval: Seconds between clears (pre-validated by controller)
     """
-    while True: # Infinite loop (managed by controller
+    while True: # Infinite loop (managed by controller)
         clear_terminal()
         time.sleep(interval)
 
