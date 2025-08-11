@@ -26,7 +26,7 @@ def clear_terminal(max_attempt=3, retry_delay=0):
             # time.sleep(retry_delay)   // NOT THE RIGHT PLACE FOR THIS
             return
         except subprocess.CalledProcessError:
-            time.sleep(retry_delay)
+            if retry_delay != 0: time.sleep(retry_delay)
             pass
 
 
