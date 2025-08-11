@@ -3,12 +3,12 @@ import time
 import os
 import sys
 
-def clear_terminal(max_attempt=3, delay=1):
+def clear_terminal(max_attempt=3, retry_delay=0):
     """
     Clears terminal with transient error retries.
     Args:
         max_retries: Maximum attempts before failing (default: 3)
-        retry_delay: Seconds between retries (default: 1)
+        retry_delay: Seconds between retries (default: 0)
     Raises:
         subprocess.CalledProcessError: If all retries fail
     """
@@ -23,9 +23,10 @@ def clear_terminal(max_attempt=3, delay=1):
             print("Terminal cleared. \n'autoclear stop' to stop. \n'autoclear status' to check status.")
            
           
-            # time.sleep(delay)
+            # time.sleep(retry_delay)   // NOT THE RIGHT PLACE FOR THIS
             return
         except subprocess.CalledProcessError:
+            time.sleep(retry_delay)
             pass
 
 
@@ -35,7 +36,7 @@ def autoclear(interval=600):
     Args:
         interval: Seconds between clears (pre-validated by controller)
     """
-    while True: # Infinite loop (managed by controller
+    while True: # Infinite loop (managed by controller)
         clear_terminal()
         time.sleep(interval)
 
