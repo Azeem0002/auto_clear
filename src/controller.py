@@ -5,7 +5,7 @@ import sys
 import subprocess
 import os
 from pathlib import Path
-from typing import Union
+from typing import Union, Literal, Optional
 
 app = typer.Typer()
 
@@ -16,13 +16,13 @@ INTERVAL = (10 * 600) // 60
 def time_format(
     seconds: Union[int, float],
     *,
-    show_hours=True,
-    show_minutes=True,
-    show_seconds=True,
-    hour_unit="h",
-    minute_unit="m",
-    second_unit="s",
-    show_higher_units=False,
+    show_hours: bool = True,
+    show_minutes: bool = True,
+    show_seconds: bool = True,
+    hour_unit: str | Literal['h'] = "h",
+    minute_unit: str | Literal['m'] = "m",
+    second_unit: str | Literal['s'] = "s",
+    show_higher_units: bool = False,
 ):
     seconds = max(0, int(round(seconds)))
 
