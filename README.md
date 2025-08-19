@@ -76,9 +76,6 @@ uv pip install -e "[dev]"
 # Run tests
 pytest tests/
 
-# Formatting $ Linting
-ruff check .
-```
 
 ### Common Issues
 
