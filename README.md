@@ -1,4 +1,4 @@
-# AutoClear
+to# AutoClear
 
 [![Python Version](https://img.shields.io/badge/python-3.12+-blue.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()
@@ -76,10 +76,7 @@ uv pip install -e "[dev]"
 # Run tests
 pytest tests/
 
-# Code formatting
-black .
-
-# Linting
+# Formatting $ Linting
 ruff check .
 ```
 
