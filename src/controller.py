@@ -5,12 +5,12 @@ import sys
 import subprocess
 import os
 from pathlib import Path
-from typing import Union, Literal, Optional
+from typing import Union, Literal
 
 app = typer.Typer()
 
 PID_FILE = Path("autoclear.pid")
-INTERVAL = (10 * 600) // 60
+INTERVAL = 600
 
 
 def time_format(

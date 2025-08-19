@@ -1,10 +1,41 @@
-# Python-generated files
+# === Python ===
 __pycache__/
 *.py[oc]
-build/
-dist/
+*.py[cod]
+*.so
+*.pyc
+*.pyo
+*.egg
+*.egg-info/
 wheels/
-*.egg-info
+dist/
+build/
+*.log
 
-# Virtual environments
-.venv
+# === VS Code ===
+.vscode/
+*.code-workspace
+*.swp
+*.swo
+
+# === OS-specific files ===
+.DS_Store
+Thumbs.db
+
+# === Test and coverage tools ===
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+
+# === Environment files ===
+.env
+.env.*
+.venv/
+env/
+venv/
+
+# === Others ===
+test.txt
+future_features.md

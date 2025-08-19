@@ -43,7 +43,7 @@ uv pip install -e .  # For development
 
 ```bash
 # Start with 10-minute interval (default)
-autoclear start
+autoclear start or autoclear 
 
 # Start with custom interval
 autoclear start -t 5  # 5 minutes
