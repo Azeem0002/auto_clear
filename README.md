@@ -24,7 +24,7 @@ AutoClear v0.1.0 is a robust Python CLI utility for automating periodic terminal
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/auto_clear.git
+git clone https://github.com/Azeem0002/auto_clear
 cd auto_clear
 
 # Create virtual environment
